@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <% @blog_posts.each_with_index do |blog_post, n| %>
+
+    <div class="col-md-6">
+	    <div class="panel panel-default">
+	    	<div class="panel-heading">
+	    		<h3><%= blog_post.title %></h3>
+		    	<h5>by <%= link_to blog_post.user.username, user_posts_path(user_id: blog_post.user.id) %></h5>
+		    	<h6><%= blog_post.created_at.strftime("%m/%d/%Y %I:%M %p") %></h6>
+	    	</div>
+		    <div class="panel-body">
+		    	<p><%= blog_post.body[0..250] %>...[<%= link_to 'Read More', blog_post %>]</p>
+		    </div>
+		    
+		    <div class="panel-footer">
+		    	<%= edit_destroy(blog_post) %>
+		    </div>
+	    </div>
+    </div>
+
+	  <% if n.odd? %> 	
+			</div>
+			<div class="row">		  	
+	  <% end %>
+
+  <% end %>
+
+</div>
+
+<br>
+
+<%= link_to 'New Post', new_blog_post_path, class: "btn btn-default" %>
